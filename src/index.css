@@ -12,7 +12,9 @@ p {
 }
 
 html, body{
-  max-width: 100%;
+  width: 100%;
+  padding:0;
+  margin:0;
 }
 
 a {
@@ -21,12 +23,37 @@ a {
 }
 
 nav {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
+  max-width: 100%;
   align-items: center;
   
-  height: 55px;
+  height: 100px;
+}
 
-}  
+.invis{
+  background: transparent;
+  border: none;
+  visibility: hidden;
+  width: 125px;
+  font-size: 32px;
+}
 
+.invis-clickable{
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 125px;
+  font-size: 32px;
+  height:100%;
+  transition-duration: 0.4s;
+}
+
+nav.box{
+  position: static;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  border: 10px solid;
+  border-image-slice: 1;
+  border-width: 5px;
+  border-image-source: linear-gradient(to left, #03f9f5, #9000fe);
+}

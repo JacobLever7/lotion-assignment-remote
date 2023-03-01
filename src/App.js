@@ -1,14 +1,10 @@
 function App() {
   return (
-    <nav>
-      <button>&#9776;</button>
+    <nav className="box">
+      <button className="invis-clickable">&#9776;</button>
       <h1>Lotion</h1>
-      <button>&#9776;</button>
+      <button className="invis">&#9776;</button>
     </nav>
-
-
-      
-
   )
 }
 
