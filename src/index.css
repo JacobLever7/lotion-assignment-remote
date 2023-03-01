@@ -57,3 +57,18 @@ nav.box{
   border-width: 5px;
   border-image-source: linear-gradient(to left, #03f9f5, #9000fe);
 }
+
+
+#notes-list a:hover, #notes-list a.active {
+  background: silver;
+}
+
+#cont-time{
+  padding-left: 30px;
+  border-bottom: 2px solid silver;
+}
+
+#cont-body{
+  height: 100vh;
+  padding-left: 30px;
+}

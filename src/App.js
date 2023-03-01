@@ -1,11 +1,15 @@
+import React from "react";
+import {BrowserRouter, Route, Routes } from "react-router-dom";
+import Layout from "./Layout";
+
 function App() {
   return (
-    <nav className="box">
-      <button className="invis-clickable">&#9776;</button>
-      <h1>Lotion</h1>
-      <button className="invis">&#9776;</button>
-    </nav>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path = "/" element = {<Layout />}></Route>
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
