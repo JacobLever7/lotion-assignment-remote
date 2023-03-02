@@ -2,8 +2,6 @@ import { useOutletContext, useParams } from "react-router-dom";
 
 function Content() {
     const { noteId } = useParams();
-    // useOutletContext returns [notes]
-    // const [notes] = [notes]
 
     const [notes] = useOutletContext();
     return (
@@ -15,7 +13,7 @@ function Content() {
                     <p id="cont-body">{notes[noteId].body}</p>
                 </div>
             ): (
-                <p>Select a notes, or create a new one</p>
+                <p>Select a note, or create a new one</p>
             )}
         </>
     );

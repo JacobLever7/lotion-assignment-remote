@@ -8,7 +8,7 @@ function Layout() {
         setNotes([
             {
                 title: `Untitled ${notes.length}`,
-                body:   "Body",
+                body: "Body",
                 when: "--",
             },
             ...notes,
@@ -31,7 +31,7 @@ function Layout() {
                         <div className="header-cont">
                             <div className="left-header-sidebar">
                                 <h1>Notes</h1>
-                                <button onClick={newNote}>+</button>
+                                <button className="add-button" onClick={newNote}>+</button>
                             </div>
                         </div>
                         <div className="header-cont">
@@ -45,7 +45,7 @@ function Layout() {
                                                 <h4>{element.title}</h4>
                                                 <h6>{element.when}</h6>
                                                 <p>{element.body}</p>
-                                            </NavLink>5
+                                            </NavLink>
                                         </li>
                                     ))}
                                 </ul>
