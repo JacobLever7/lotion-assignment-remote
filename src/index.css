@@ -95,13 +95,19 @@ nav.box{
   border-right: 2px solid silver;
   height: 100vh;
 }
+
 .right-cont {
   width:100%;
   padding-top: 20px; 
 }
 
+
 .right-cont h2,p {
   padding-left: 7%;
+}
+
+.ql-toolbar.ql-snow{
+  border-left: none;
 }
 
 .left-header-sidebar {
@@ -128,22 +134,24 @@ nav.box{
   color: white;
 }
 
-li{
+.left-cont li{
   list-style-type: none;
   padding: 5px;
   padding-left: 7%;
   transition-duration: 0.3s;
 }
-li:hover{
+.left-cont li:hover{
   background-color: #9000fe;
   color: white;
   transition-duration: 0.3s;
 }
 
-ul {
+.left-cont ul {
   margin:0;
   padding:0;
-  
 }
 
+.hidden{
+  visibility: none;
+}
 
