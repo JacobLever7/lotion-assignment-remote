@@ -109,6 +109,13 @@ nav.box{
 .ql-toolbar.ql-snow{
   border-left: none;
 }
+.ql-snow{
+  border-left: none !important;
+  border-right: none !important;
+}
+.ql-editor{
+  height: 100vh !important;
+}
 
 .left-header-sidebar {
   padding-left: 7%;

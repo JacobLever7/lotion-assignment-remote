@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import ReactQuill from "react-quill";
+import uuid from "react-uuid";
+
+
 
 import 'react-quill/dist/quill.snow.css';
 
@@ -18,13 +21,18 @@ function Layout() {
     const newNote = () => {
         setNotes([
             {
+                id: uuid(),
                 title: `Untitled ${notes.length}`,
-                body: "Body",
-                when: "--",
+                body: "",
+                when: Date.now(),
             },
             ...notes,
         ]);
     };
+
+    const deleteNote = (idToDelete) => {
+        setNotes(notes.filter((note) => note.id !== idToDelete));
+    }
 
     return (
         <>
@@ -55,11 +63,15 @@ function Layout() {
                                     ): (
                                         <ul id="notes-list">
                                             {notes.map((element, idx) => (
-                                                <li>
+                                                <li key={element.id}>
                                                     <NavLink to ={`/notes/${idx}`}>
                                                         <h4>{element.title}</h4>
-                                                        <h6>{element.when}</h6>
-                                                        <p>{element.body}</p>
+                                                        <h6>{new Date(element.when).toLocaleDateString("en-GB", {
+                                                            hour: "2-digit",
+                                                            minute: "2-digit",
+                                                        })}</h6>
+                                                        <p>{element.body && element.body.substr(0, 100) + "..."}</p>
+                                                        <button onClick={() => deleteNote(element.id)}>Delete</button>
                                                     </NavLink>
                                                 </li>
                                             ))}
@@ -69,12 +81,24 @@ function Layout() {
                             </div>
                         : null
                     }
-                        
+                    
                         <div className="right-cont">
-                            {/* child components get injected here and replace <outlet /> */}
-                            <ReactQuill/>
-                            
-                            <Outlet context={[notes]}/>
+                            {notes.length !== 0 ? (
+                                <>
+                                    <div id="header-edit">
+                                        <input type="text" id="title-input" autoFocus/>
+                                        <input type="datetime-local" />
+                                        <button>Save</button>
+                                    </div>
+                                    
+                                    {/* child components get injected here and replace <outlet /> */}
+                                    <ReactQuill placeholder= "Write something here..." /*value={notes}*//>
+                                </>
+                                
+                            ): (
+                                <div></div>
+                            )}  
+
                             
                         </div>
                 </div>
