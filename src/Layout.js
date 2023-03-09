@@ -2,22 +2,28 @@ import React, { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import ReactQuill from "react-quill";
 import uuid from "react-uuid";
-
-
-
 import 'react-quill/dist/quill.snow.css';
 
 function Layout() {
     const [notes, setNotes] = useState([]);
 
+   
+    
     //toggle sidebar state(default is true)
     const [visibility, setVisibility] = useState(true);
+
+    //state for active note
+    const [activeNote, setActiveNote] = useState(false);
+
+
 
     //toggle state
     const visToggle = () => {
         setVisibility((current) => !current);
     };
 
+    
+    
     const newNote = () => {
         setNotes([
             {
@@ -63,7 +69,8 @@ function Layout() {
                                     ): (
                                         <ul id="notes-list">
                                             {notes.map((element, idx) => (
-                                                <li key={element.id}>
+                                                <li key={element.id} className={`sidebar-note${element.id === activeNote && " active"}`} 
+                                                onClick={() => setActiveNote(element.id)}>
                                                     <NavLink to ={`/notes/${idx}`}>
                                                         <h4>{element.title}</h4>
                                                         <h6>{new Date(element.when).toLocaleDateString("en-GB", {
@@ -82,25 +89,23 @@ function Layout() {
                         : null
                     }
                     
-                        <div className="right-cont">
-                            {notes.length !== 0 ? (
-                                <>
-                                    <div id="header-edit">
-                                        <input type="text" id="title-input" autoFocus/>
-                                        <input type="datetime-local" />
-                                        <button>Save</button>
-                                    </div>
-                                    
-                                    {/* child components get injected here and replace <outlet /> */}
-                                    <ReactQuill placeholder= "Write something here..." /*value={notes}*//>
-                                </>
+                    <div className="right-cont">
+                        {notes.length !== 0 ? (
+                            <>
+                                <div id="header-edit">
+                                    <input type="text" id="title-input" autoFocus/>
+                                    <input type="datetime-local" />
+                                    <button>Save</button>
+                                </div>
                                 
-                            ): (
-                                <div></div>
-                            )}  
-
+                                {/* child components get injected here and replace <outlet /> */}
+                                <ReactQuill placeholder= "Write something here..." /*value={notes}*//>
+                            </>
                             
-                        </div>
+                        ): (
+                            <h2>Select a note, or create a new one.</h2>
+                        )}
+                    </div>
                 </div>
             </div>
         </>

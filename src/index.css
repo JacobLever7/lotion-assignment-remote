@@ -162,3 +162,8 @@ nav.box{
   visibility: none;
 }
 
+.sidebar-note.active {
+  background: #9000fe;
+  color: white;
+}
+
