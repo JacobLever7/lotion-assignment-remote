@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink} from "react-router-dom";
 import ReactQuill from "react-quill";
 import uuid from "react-uuid";
 import 'react-quill/dist/quill.snow.css';
@@ -26,9 +26,6 @@ function Layout() {
     }
 
     let activeNoteData = getActiveNote();
-
-    //state for view mode
-    const [viewMode, setViewMode] = useState(false);
 
     //state for date
     const [date, setDate] = useState((activeNoteData == null ? (""): (moment(activeNoteData.when).format("YYYY-MM-DDTkk:mm"))));
@@ -113,7 +110,7 @@ function Layout() {
                     }
                     
                     <div className="right-cont">
-                        {activeNote !== false && viewMode === false ? (
+                        {activeNote !== false ? (
                             <>
                                 <div id="header-edit">
                                     <div id="title-calendar">
