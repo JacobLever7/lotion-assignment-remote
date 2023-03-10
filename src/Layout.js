@@ -27,6 +27,18 @@ function Layout() {
 
     let activeNoteData = getActiveNote();
 
+    //state for view mode
+    const [viewMode, setViewMode] = useState(false);
+
+    //state for date
+    const [date, setDate] = useState((activeNoteData == null ? (""): (moment(activeNoteData.when).format("YYYY-MM-DDTkk:mm"))));
+    
+    //changeDate function
+    const changeDate = event => {
+        setDate(event.target.value)
+    }
+
+
     
     const newNote = () => {
         
@@ -101,17 +113,17 @@ function Layout() {
                     }
                     
                     <div className="right-cont">
-                        {activeNote !== false ? (
+                        {activeNote !== false && viewMode === false ? (
                             <>
                                 <div id="header-edit">
                                     <input type="text" id="title-input" autoFocus value={activeNoteData === null ? (null): (activeNoteData.title) }/>
-                                    <input type="datetime-local" value={activeNoteData === null ? (null): (moment(activeNoteData.when).format("YYYY-MM-DDTkk:mm")) } />
+                                    <input type="datetime-local" value={date} onChange={changeDate}/>
                                     <button>Save</button>
                                     <button onClick={() => deleteNote(activeNoteData.id)}>Delete</button>
                                 </div>
                                 
                                 {/* child components get injected here and replace <outlet /> */}
-                                <ReactQuill  placeholder="Write something here..." value = {activeNoteData === null ? (null): (activeNoteData.body) }/>
+                                <ReactQuill  placeholder="Write something here..." value = {activeNoteData === null ? (null): (activeNoteData.body) } /*onChange={setViewMode}*//>
                             </>
                             
                         ): (
