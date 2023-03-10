@@ -3,42 +3,54 @@ import { NavLink, Outlet } from "react-router-dom";
 import ReactQuill from "react-quill";
 import uuid from "react-uuid";
 import 'react-quill/dist/quill.snow.css';
+import moment from 'moment';
 
 function Layout() {
-    const [notes, setNotes] = useState([]);
+    const [notes, setNotes] = useState(
+        localStorage.notes ? JSON.parse(localStorage.notes) : []);
 
-   
-    
     //toggle sidebar state(default is true)
     const [visibility, setVisibility] = useState(true);
 
     //state for active note
     const [activeNote, setActiveNote] = useState(false);
 
-
-
     //toggle state
     const visToggle = () => {
         setVisibility((current) => !current);
     };
 
-    
+    //find active note
+    const getActiveNote = () => {
+        return (activeNote === false ? (null) : (notes.find((note) => note.id === activeNote))) 
+    }
+
+    let activeNoteData = getActiveNote();
+
     
     const newNote = () => {
-        setNotes([
-            {
-                id: uuid(),
-                title: `Untitled ${notes.length}`,
-                body: "",
-                when: Date.now(),
-            },
-            ...notes,
-        ]);
+        
+        const addNote ={
+            id: uuid(),
+            title: `Untitled ${notes.length}`,
+            body: "",
+            when: Date.now(),
+        };
+        setNotes([addNote, ...notes]);
+
+        setActiveNote(addNote.id);
     };
 
     const deleteNote = (idToDelete) => {
-        setNotes(notes.filter((note) => note.id !== idToDelete));
+        const feedback = window.confirm("Are you sure you want to delete this note?");
+
+        if(feedback) {
+            setNotes(notes.filter((note) => note.id !== idToDelete)); 
+            setActiveNote(false);
+        }
+        
     }
+
 
     return (
         <>
@@ -73,12 +85,11 @@ function Layout() {
                                                 onClick={() => setActiveNote(element.id)}>
                                                     <NavLink to ={`/notes/${idx}`}>
                                                         <h4>{element.title}</h4>
-                                                        <h6>{new Date(element.when).toLocaleDateString("en-GB", {
+                                                        <h6>{new Date(element.when).toLocaleDateString("en-US", {
                                                             hour: "2-digit",
                                                             minute: "2-digit",
                                                         })}</h6>
                                                         <p>{element.body && element.body.substr(0, 100) + "..."}</p>
-                                                        <button onClick={() => deleteNote(element.id)}>Delete</button>
                                                     </NavLink>
                                                 </li>
                                             ))}
@@ -90,16 +101,17 @@ function Layout() {
                     }
                     
                     <div className="right-cont">
-                        {notes.length !== 0 ? (
+                        {activeNote !== false ? (
                             <>
                                 <div id="header-edit">
-                                    <input type="text" id="title-input" autoFocus/>
-                                    <input type="datetime-local" />
+                                    <input type="text" id="title-input" autoFocus value={activeNoteData === null ? (null): (activeNoteData.title) }/>
+                                    <input type="datetime-local" value={activeNoteData === null ? (null): (moment(activeNoteData.when).format("YYYY-MM-DDTkk:mm")) } />
                                     <button>Save</button>
+                                    <button onClick={() => deleteNote(activeNoteData.id)}>Delete</button>
                                 </div>
                                 
                                 {/* child components get injected here and replace <outlet /> */}
-                                <ReactQuill placeholder= "Write something here..." /*value={notes}*//>
+                                <ReactQuill  placeholder="Write something here..." value = {activeNoteData === null ? (null): (activeNoteData.body) }/>
                             </>
                             
                         ): (
