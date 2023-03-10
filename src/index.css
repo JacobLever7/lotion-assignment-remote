@@ -92,18 +92,18 @@ nav.box{
   flex-direction: column;
   left:0;
   width: 20%;
-  border-right: 2px solid silver;
+  border-right: 2px solid darkgrey;
   height: 100vh;
 }
 
 .right-cont {
   width:100%;
-  padding-top: 20px; 
 }
 
-
-.right-cont h2,p {
+.right-cont h2 {
   padding-left: 7%;
+  color: silver;
+  margin: 20%;
 }
 
 .ql-toolbar.ql-snow{
@@ -142,8 +142,10 @@ nav.box{
 }
 
 .left-cont li{
+  font-size: larger;
+  padding-top: 30px;
+  padding-bottom: 30px;
   list-style-type: none;
-  padding: 5px;
   padding-left: 7%;
   transition-duration: 0.3s;
 }
@@ -167,3 +169,45 @@ nav.box{
   color: white;
 }
 
+.edit-button{
+  background: transparent;
+  border: none;
+  font-size: large;
+  cursor: pointer;
+  height:85px;
+  transition-duration: 0.4s;
+  width: 85px;
+
+  padding: 0;
+}
+
+.edit-button:hover{
+  background-color: #9000fe;
+  color: white;
+}
+
+#header-edit{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#title-calendar{
+  display:flex;
+  flex-direction: column;
+}
+
+#title-input{
+  border-style: none;
+  outline: 1px solid silver;
+  font-size: larger;
+  padding: 7px;
+  margin: 5px;
+
+}
+#calendar-input{
+  border-style: none;
+  outline: none;
+  margin: 10px;
+}

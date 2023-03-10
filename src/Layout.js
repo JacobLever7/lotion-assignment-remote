@@ -116,10 +116,15 @@ function Layout() {
                         {activeNote !== false && viewMode === false ? (
                             <>
                                 <div id="header-edit">
-                                    <input type="text" id="title-input" autoFocus value={activeNoteData === null ? (null): (activeNoteData.title) }/>
-                                    <input type="datetime-local" value={date} onChange={changeDate}/>
-                                    <button>Save</button>
-                                    <button onClick={() => deleteNote(activeNoteData.id)}>Delete</button>
+                                    <div id="title-calendar">
+                                        <input type="text" id="title-input" autoFocus value={activeNoteData === null ? (null): (activeNoteData.title) }/>
+                                        <input id="calendar-input" type="datetime-local" value={date} onChange={changeDate}/>
+                                    </div>
+                                    <div id="buttons-edit">
+                                        <button className="edit-button" >Save</button>
+                                        <button className="edit-button" onClick={() => deleteNote(activeNoteData.id)}>Delete</button>
+                                    </div>
+                                    
                                 </div>
                                 
                                 {/* child components get injected here and replace <outlet /> */}
